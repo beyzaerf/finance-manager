@@ -7,6 +7,11 @@ import jakarta.ws.rs.core.Response;
 import org.acme.model.Income;
 import org.acme.service.IncomeService;
 
+import java.math.BigDecimal;
+import java.time.YearMonth;
+import java.time.format.DateTimeParseException;
+import java.util.List;
+
 @Path("/income")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
@@ -48,6 +53,28 @@ public class IncomeController {
     public Response deleteIncome(@PathParam("id") Long id) {
         incomeService.deleteIncome(id);
         return Response.noContent().build();
+    }
+
+    @GET
+    public Response getAllIncome() {
+        List<Income> incomes = incomeService.getAllIncomes();
+        if (incomes != null) {
+            return Response.ok(incomes).build();
+        } else {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+    }
+
+    @GET
+    @Path("monthly-total")
+    public Response calculateMonthlyIncome(@QueryParam("yearMonth") String yearMonthString) {
+        try {
+            YearMonth yearMonth = YearMonth.parse(yearMonthString);
+            BigDecimal monthlyTotal = incomeService.calculateMonthlyIncome(yearMonth);
+            return Response.ok(monthlyTotal).build();
+        } catch (DateTimeParseException e) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("Invalid yearMonth format. Expected format: yyyy-MM").build();
+        }
     }
 
 }
