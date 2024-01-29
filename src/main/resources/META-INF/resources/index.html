@@ -15,7 +15,43 @@
     <button type="submit">Add Expense</button>
 </form>
 
+<!-- Form to Delete Expense -->
+<form id="deleteExpenseForm">
+    <label for="expenseIdToDelete"></label><input type="number" id="expenseIdToDelete" placeholder="Expense ID to delete" required>
+    <button type="submit">Delete Expense</button>
+</form>
+
+<!-- Form to Calculate Monthly Expenses -->
+<form id="calculateMonthlyExpensesForm">
+    <label for="monthForExpenses"></label><input type="month" id="monthForExpenses" required>
+    <button type="submit">Calculate Monthly Expenses</button>
+</form>
+
+<h1>Income Manager</h1>
+
+<!-- Form to Add Income -->
+<form id="incomeForm">
+    <label for="incomeAmount"></label><input type="number" id="incomeAmount" placeholder="Income Amount" required>
+    <label for="incomeDescription"></label><input type="text" id="incomeDescription" placeholder="Income Description" required>
+    <label for="incomeDate"></label><input type="date" id="incomeDate" required>
+    <button type="submit">Add Income</button>
+</form>
+
+<!-- Form to Delete Income -->
+<form id="deleteIncomeForm">
+    <label for="incomeIdToDelete"></label><input type="number" id="incomeIdToDelete" placeholder="Income ID to delete" required>
+    <button type="submit">Delete Income</button>
+</form>
+
+<!-- Form to Calculate Monthly Income -->
+<form id="calculateMonthlyIncomeForm">
+    <label for="monthForIncome"></label><input type="month" id="monthForIncome" required>
+    <button type="submit">Calculate Monthly Income</button>
+</form>
+
 <div id="expensesList"></div>
+
+<div id="incomeList"></div>
 
 <script src="/js/script.js"></script>
 </body>
