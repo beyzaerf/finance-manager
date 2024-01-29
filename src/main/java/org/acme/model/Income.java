@@ -1,8 +1,11 @@
 package org.acme.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -16,11 +19,13 @@ import java.util.Date;
  */
 @Entity
 public class Income {
+
   @Id
+  @GeneratedValue
   private Long id;
   private BigDecimal amount;
   private String description;
-  private Date date;
+  private LocalDate date;
 
 
   public void setId(Long id) {
@@ -31,11 +36,11 @@ public class Income {
     return id;
   }
 
-  public Date getDate() {
+  public LocalDate getDate() {
     return date;
   }
 
-  public void setDate(Date date) {
+  public void setDate(LocalDate date) {
     this.date = date;
   }
 
