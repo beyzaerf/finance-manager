@@ -6,8 +6,9 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 import java.math.BigDecimal;
-import java.time.YearMonth;
+import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.Date;
 import java.util.List;
 
 import org.acme.model.Expense;
@@ -111,8 +112,8 @@ public class ExpenseController {
   @Path("monthly-total")
   public Response calculateMonthlyExpenses(@QueryParam("yearMonth") String yearMonthString) {
     try {
-      YearMonth yearMonth = YearMonth.parse(yearMonthString);
-      BigDecimal monthlyTotal = expenseService.calculateMonthlyExpenses(yearMonth);
+      LocalDate date = LocalDate.parse(yearMonthString);
+      BigDecimal monthlyTotal = expenseService.calculateMonthlyExpenses(date);
       return Response.ok(monthlyTotal).build();
     } catch (DateTimeParseException e) {
       return Response.status(Response.Status.BAD_REQUEST)

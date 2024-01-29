@@ -8,6 +8,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeParseException;
 import java.util.List;
@@ -113,8 +114,8 @@ public class IncomeController {
   @Path("monthly-total")
   public Response calculateMonthlyIncome(@QueryParam("yearMonth") String yearMonthString) {
     try {
-      YearMonth yearMonth = YearMonth.parse(yearMonthString);
-      BigDecimal monthlyTotal = incomeService.calculateMonthlyIncome(yearMonth);
+      LocalDate date = LocalDate.parse(yearMonthString);
+      BigDecimal monthlyTotal = incomeService.calculateMonthlyIncome(date);
       return Response.ok(monthlyTotal).build();
     } catch (DateTimeParseException e) {
       return Response.status(Response.Status.BAD_REQUEST)
