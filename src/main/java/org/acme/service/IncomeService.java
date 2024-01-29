@@ -1,11 +1,13 @@
 package org.acme.service;
 
-import java.math.BigDecimal;
-import java.time.YearMonth;
-import java.util.List;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+
+import java.math.BigDecimal;
+import java.time.YearMonth;
+import java.util.List;
+
 import org.acme.model.Income;
 import org.acme.repository.IncomeRepository;
 import org.jboss.logging.Logger;
