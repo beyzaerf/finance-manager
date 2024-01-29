@@ -5,6 +5,7 @@ import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.List;
 
@@ -70,10 +71,10 @@ public class IncomeService {
   }
 
   @Transactional
-  public BigDecimal calculateMonthlyIncome(YearMonth month) {
+  public BigDecimal calculateMonthlyIncome(LocalDate month) {
     List<Income> incomes = incomeRepository.list("date >= ?1 and date < ?2",
-            month.atDay(1),
-            month.plusMonths(1).atDay(1));
+            month.withDayOfMonth(1),
+            month.plusMonths(1).withDayOfMonth(1));
     return incomes.stream()
             .map(Income::getAmount)
             .reduce(BigDecimal.ZERO, BigDecimal::add);

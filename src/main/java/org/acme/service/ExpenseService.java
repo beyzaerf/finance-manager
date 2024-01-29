@@ -8,6 +8,7 @@ import org.acme.repository.ExpenseRepository;
 import org.jboss.logging.Logger;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.List;
 
@@ -81,11 +82,11 @@ public class ExpenseService {
   }
 
   @Transactional
-  public BigDecimal calculateMonthlyExpenses(YearMonth month) {
+  public BigDecimal calculateMonthlyExpenses(LocalDate month) {
     LOGGER.debug("Calculating expenses...");
     List<Expense> expenses = expenseRepository.list("date >= ?1 and date < ?2",
-            month.atDay(1),
-            month.plusMonths(1).atDay(1));
+            month.withDayOfMonth(1),
+            month.plusMonths(1).withDayOfMonth(1));
     return expenses.stream()
             .map(Expense::getAmount)
             .reduce(BigDecimal.ZERO, BigDecimal::add);
